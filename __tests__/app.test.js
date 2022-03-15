@@ -14,16 +14,16 @@ const Order = require('../lib/models/Order');
 // }
 
 // TODO: Remove this function & use the Order model
-async function getOrderById(id) {
-  const { rows } = await pool.query(
-    'SELECT * FROM orders WHERE id=$1;',
-    [id]
-  );
+// async function getOrderById(id) {
+//   const { rows } = await pool.query(
+//     'SELECT * FROM orders WHERE id=$1;',
+//     [id]
+//   );
 
-  if (!rows[0]) return null;
+//   if (!rows[0]) return null;
 
-  return new Order(rows[0]);
-}
+//   return new Order(rows[0]);
+// }
 
 describe('refactory routes', () => {
   beforeEach(() => {
@@ -79,7 +79,7 @@ describe('refactory routes', () => {
     };
 
     expect(res.body).toEqual(expected);
-    expect(await getOrderById(order.id)).toEqual(expected);
+    expect(await Order.getById(order.id)).toEqual(expected);
   });
 
   it('should be able to delete an order', async () => {
@@ -87,6 +87,6 @@ describe('refactory routes', () => {
     const res = await request(app).delete(`/api/v1/orders/${order.id}`);
 
     expect(res.body).toEqual(order);
-    expect(await getOrderById(order.id)).toBeNull();
+    expect(await Order.getById(order.id)).toBeNull();
   });
 });
