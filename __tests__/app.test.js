@@ -5,13 +5,13 @@ const app = require('../lib/app');
 const Order = require('../lib/models/Order');
 
 // TODO: Remove this function & use the Order model
-async function createOrder({ product, quantity }) {
-  const { rows } = await pool.query(
-    'INSERT INTO orders(product, quantity) VALUES ($1, $2) RETURNING *;',
-    [product, quantity]
-  );
-  return new Order(rows[0]);
-}
+// async function createOrder({ product, quantity }) {
+//   const { rows } = await pool.query(
+//     'INSERT INTO orders(product, quantity) VALUES ($1, $2) RETURNING *;',
+//     [product, quantity]
+//   );
+//   return new Order(rows[0]);
+// }
 
 // TODO: Remove this function & use the Order model
 async function getOrderById(id) {
